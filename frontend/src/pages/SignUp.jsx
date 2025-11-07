@@ -3,9 +3,11 @@ import logo from '../assets/icon.svg';
 import google from '../assets/google.jpg';
 import {IoEye, IoEyeOutline} from 'react-icons/io5';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-    const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
   return (
   <div className='bg-[#dddbbd] w-screen h-screen flex items-center justify-center'>
   <form className='w-[98%] md:w-[800px] h-[600px] bg-white shadow-xl rounded-2xl flex overflow-hidden'>
@@ -55,7 +57,10 @@ const SignUp = () => {
                       <span className='text-[18px]'>oogle</span>
                       
                       
-                  </div>
+          </div>
+          <div className='text-[#6f6f6f]'>Already have an account <span className='underline underline-offset-1 text-[black]' onClick={()=>navigate("/login")}>Login</span>
+
+          </div>
 
                  
     </div>
