@@ -9,6 +9,8 @@ import { serverUrl } from '../App';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/userSlice';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../../utils/firebase';
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -34,6 +36,39 @@ const Login = () => {
       console.log(error);
       setLoading(false);
       toast.error(error.response.data.message);
+    }
+  };
+
+  const googleSignUp = async () => {
+    setLoading(true);
+    try {
+      // Firebase popup for Google login
+      const response = await signInWithPopup(auth, provider);
+      const user = response.user;
+      const name = user.displayName;
+      const email = user.email;
+      const profilePic = user.photoURL;
+      const role = 'user'; // default role
+
+      // Send user info to backend for signup/login
+      const result = await axios.post(
+        serverUrl + '/api/auth/googleauth',
+        { name, email, profilePic, role },
+        { withCredentials: true }
+      );
+
+      // Save user and redirect
+      dispatch(setUserData(result.data));
+      toast.success('Login Successful');
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      const message =
+        error?.response?.data?.message ||
+        'Google sign-up failed. Please try again.';
+      toast.error(message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -141,7 +176,10 @@ const Login = () => {
           </div>
 
           {/* 🔘 Google Login */}
-          <div className="w-[80%] h-[40px] border-1 border-[black] rounded-[5PX] flex items-center justify-center">
+          <div
+            className="w-[80%] h-[40px] border-1 border-[black] rounded-[5PX] flex items-center justify-center cursor-pointer"
+            onClick={googleSignUp}
+          >
             <img src={google} className="w-[25px]" alt="google" />
             <span className="text-[18px]">oogle</span>
           </div>

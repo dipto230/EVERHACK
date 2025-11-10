@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import { ClipLoader } from 'react-spinners';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/userSlice';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../../utils/firebase';
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
@@ -36,6 +38,32 @@ const SignUp = () => {
       console.log(error);
       setLoading(false);
       toast.error(error.response.data.message);
+    }
+  };
+
+  const googleSignUp = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      const user = response.user;
+      const name = user.displayName;
+      const email = user.email;
+
+      // Send user info to your backend for signup/login
+      const result = await axios.post(
+        serverUrl + '/api/auth/googleauth',
+        { name, email, role },
+        { withCredentials: true }
+      );
+
+      dispatch(setUserData(result.data));
+      navigate('/');
+      toast.success('Signup Successful');
+    } catch (error) {
+      console.error(error);
+      const message =
+        error?.response?.data?.message ||
+        'Google sign-up failed. Please try again.';
+      toast.error(message);
     }
   };
 
@@ -128,7 +156,7 @@ const SignUp = () => {
             )}
           </div>
 
-          {/* Role Selection - Glowing Buttons */}
+          {/* Role Selection */}
           <div className="flex md:w-[50%] w-[70%] items-center justify-between gap-4">
             <span
               className={`px-[20px] py-[6px] rounded-2xl cursor-pointer transition-all duration-300 text-[14px] font-medium
@@ -177,7 +205,10 @@ const SignUp = () => {
           </div>
 
           {/* Google Login */}
-          <div className="w-[80%] h-[40px] border-1 border-[black] rounded-[5PX] flex items-center justify-center">
+          <div
+            className="w-[80%] h-[40px] border-1 border-[black] rounded-[5PX] flex items-center justify-center cursor-pointer"
+            onClick={googleSignUp}
+          >
             <img src={google} className="w-[25px]" alt="google" />
             <span className="text-[18px]">oogle</span>
           </div>
