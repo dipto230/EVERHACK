@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Nav from '../component/Nav'
+import ExploreCourses from '../component/ExploreCourses'
 
 const Home = () => {
   return (
@@ -12,7 +13,7 @@ const Home = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="w-full lg:h-[140vh] h-[80vh] flex flex-col items-center justify-center text-center relative">
+      <div className="w-full min-h-screen flex flex-col items-center justify-center text-center relative">
         
         {/* Animated Background Glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-emerald-500/10 to-transparent blur-[120px] animate-pulse" />
@@ -79,6 +80,7 @@ const Home = () => {
         <div className="absolute top-10 left-10 w-40 h-40 bg-cyan-400/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-10 right-20 w-60 h-60 bg-emerald-400/20 rounded-full blur-3xl animate-pulse" />
       </div>
+      <ExploreCourses/>
     </div>
   )
 }
