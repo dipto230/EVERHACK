@@ -119,6 +119,7 @@ function Nav() {
                   <span
                     onClick={() => { navigate('/courses'); setShowMenu(false) }}
                     className='w-full px-4 py-2 text-black rounded-md hover:bg-[#00FFD1] hover:text-black cursor-pointer transition-all duration-200'
+                  
                   >
                     My Courses
                   </span>
