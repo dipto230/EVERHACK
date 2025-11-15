@@ -14,6 +14,8 @@ import Dashboard from './pages/Educator/Dashboard.jsx'
 import Courses from './pages/Educator/Courses.jsx'
 import CreateCourses from './pages/Educator/CreateCourses.jsx'
 import getCreatorCourse from './customHooks/getCreatorCourse.js'
+import getPublishedCourse from './customHooks/getPublishedCourse.js'
+
 import EditCourse from './pages/EditCourse.jsx'
 
 
@@ -21,6 +23,7 @@ import EditCourse from './pages/EditCourse.jsx'
 const App = () => {
   getCurrentUser()
   getCreatorCourse()
+  getPublishedCourse()
   
   const { userData } = useSelector(state=>state.user);
   return (
