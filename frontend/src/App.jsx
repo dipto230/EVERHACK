@@ -13,10 +13,15 @@ import EditProfile from './pages/EditProfile.jsx'
 import Dashboard from './pages/Educator/Dashboard.jsx'
 import Courses from './pages/Educator/Courses.jsx'
 import CreateCourses from './pages/Educator/CreateCourses.jsx'
+import getCreatorCourse from './customHooks/getCreatorCourse.js'
+import EditCourse from './pages/EditCourse.jsx'
+
 
 
 const App = () => {
   getCurrentUser()
+  getCreatorCourse()
+  
   const { userData } = useSelector(state=>state.user);
   return (
     <>
@@ -47,7 +52,17 @@ const App = () => {
           userData?.role?.toLowerCase() === "educator"
             ? <CreateCourses />
             : <Navigate to="/signup" />
-        }/>
+        } />
+        
+        <Route
+  path="/editcourse/:courseId"
+  element={
+    userData?.role === "educator"
+      ? <EditCourse />
+      : <Navigate to="/signup" />
+  }
+/>
+
         
         
         </Routes>

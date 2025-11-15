@@ -4,9 +4,33 @@ import { useNavigate } from 'react-router-dom'
 import img from "../../assets/empty.jpg"
 import { FaEdit } from "react-icons/fa"
 import { motion } from "framer-motion"
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { serverUrl } from '../../App'
+import { setCreatorCourseData } from '../../redux/courseSlice'
 
 function Courses() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const{userData} = useSelector(state=>state.user)
+  const { creatorCourseData } = useSelector(state => state.course);
+
+  useEffect(() => {
+    const creatorCourses = async () => {
+      try {
+        const result = await axios.get(serverUrl + "/api/course/getcreator", { withCredentials: true })
+        console.log(result.data)
+        dispatch(setCreatorCourseData(result.data))
+        
+      } catch (error) {
+        console.log(error)
+        
+      }
+    }
+    creatorCourses()
+    
+  },[userData])
 
   return (
     <motion.div 
@@ -23,7 +47,7 @@ function Courses() {
       />
 
       <div className="w-full min-h-screen p-4 sm:p-6 relative z-10">
-        
+
         {/* Header */}
         <motion.div 
           className="flex flex-col sm:flex-row justify-center sm:justify-between items-start sm:items-center mb-6 gap-4 sm:gap-8"
@@ -82,38 +106,59 @@ function Courses() {
                 ))}
               </tr>
             </thead>
+
             <tbody>
-              <motion.tr 
-                className="border-b border-cyan-900/40 hover:bg-cyan-800/10 transition duration-300 cursor-pointer"
-                whileHover={{ scale: 1.01, boxShadow: "0 0 15px rgba(0,255,255,0.3)" }}
-              >
-                <td className="py-3 px-4 flex items-center gap-4 text-gray-200">
-                  <motion.img 
-                    src={img} 
-                    alt="" 
-                    className="w-25 h-14 object-cover rounded-md shadow-[0_0_10px_rgba(0,255,255,0.3)]"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  />
-                  <span className="font-medium text-cyan-200">Title</span>
-                </td>
-                <td className="px-4 py-3 text-gray-400">NA</td>
-                <td className="px-4 py-3">
-                  <span className="px-3 py-1 rounded-full text-xs bg-cyan-900/50 text-cyan-300 shadow-[0_0_8px_#00ffff]">
-                    Draft
-                  </span>
-                </td>
-                <td className="px-4 py-3">
-                  <motion.div 
-                    whileHover={{ rotate: 10, scale: 1.2 }}
-                    transition={{ type: "spring", stiffness: 250 }}
+              {creatorCourseData?.length > 0 ? (
+                creatorCourseData.map((course, index) => (
+                  <motion.tr 
+                    key={index}
+                    className="border-b border-cyan-900/40 hover:bg-cyan-800/10 transition duration-300 cursor-pointer"
+                    whileHover={{ scale: 1.01, boxShadow: "0 0 15px rgba(0,255,255,0.3)" }}
                   >
-                    <FaEdit className="text-cyan-400 hover:text-cyan-300 cursor-pointer drop-shadow-[0_0_8px_#00ffff]"/>
-                  </motion.div>
-                </td>
-              </motion.tr>
+                    <td className="py-3 px-4 flex items-center gap-4 text-gray-200">
+                      <motion.img 
+                        src={course.thumbnail || img}
+                        alt=""
+                        className="w-25 h-14 object-cover rounded-md shadow-[0_0_10px_rgba(0,255,255,0.3)]"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      />
+                      <span className="font-medium text-cyan-200">
+                        {course.title}
+                      </span>
+                    </td>
+
+                    <td className="px-4 py-3 text-gray-400">
+                      {course.price || "NA"}
+                    </td>
+
+                    <td className="px-4 py-3">
+                      <span className="px-3 py-1 rounded-full text-xs bg-cyan-900/50 text-cyan-300 shadow-[0_0_8px_#00ffff]">
+                        {course.status || "Draft"}
+                      </span>
+                    </td>
+
+                    <td className="px-4 py-3">
+                      <motion.div 
+                        whileHover={{ rotate: 10, scale: 1.2 }}
+                        transition={{ type: "spring", stiffness: 250 }}
+                        onClick={() => navigate(`/editcourse/${course._id}`)}
+                      >
+                        <FaEdit className="text-cyan-400 hover:text-cyan-300 cursor-pointer drop-shadow-[0_0_8px_#00ffff]"/>
+                      </motion.div>
+                    </td>
+                  </motion.tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4" className="text-center py-6 text-cyan-400 italic">
+                    No courses created yet.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </motion.table>
+
           <motion.p 
             className="text-center text-sm text-cyan-400 mt-6 italic drop-shadow-[0_0_10px_#00ffff]"
             initial={{ opacity: 0 }}
@@ -131,33 +176,50 @@ function Courses() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.div 
-            className="bg-[#0a1124]/60 backdrop-blur-md rounded-2xl shadow-[0_0_25px_rgba(0,255,255,0.1)] p-4 flex flex-col gap-3 hover:shadow-[0_0_20px_rgba(0,255,255,0.4)] border border-cyan-500/40"
-            whileHover={{ scale: 1.02 }}
-          >
-            <div className="flex gap-4 items-center">
-              <motion.img
-                src={img}
-                className="w-16 h-16 rounded-md object-cover shadow-[0_0_10px_rgba(0,255,255,0.3)]"
-                alt=""
-                whileHover={{ scale: 1.05 }}
-              />
-              <div className="flex-1">
-                <h2 className="font-medium text-sm text-cyan-200">Title</h2>
-                <p className="text-gray-400 text-xs mt-1">NA</p>
-              </div>
-              <motion.div whileHover={{ rotate: 10, scale: 1.2 }}>
-                <FaEdit className="text-cyan-400 hover:text-cyan-300 cursor-pointer drop-shadow-[0_0_8px_#00ffff]"/>
+          {creatorCourseData?.length > 0 ? (
+            creatorCourseData.map((course, index) => (
+              <motion.div 
+                key={index}
+                className="bg-[#0a1124]/60 backdrop-blur-md rounded-2xl shadow-[0_0_25px_rgba(0,255,255,0.1)] p-4 flex flex-col gap-3 hover:shadow-[0_0_20px_rgba(0,255,255,0.4)] border border-cyan-500/40"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="flex gap-4 items-center">
+                  <motion.img
+                    src={course.thumbnail || img}
+                    className="w-16 h-16 rounded-md object-cover shadow-[0_0_10px_rgba(0,255,255,0.3)]"
+                    alt=""
+                    whileHover={{ scale: 1.05 }}
+                  />
+                  <div className="flex-1">
+                    <h2 className="font-medium text-sm text-cyan-200">{course.title}</h2>
+                    <p className="text-gray-400 text-xs mt-1">
+                      {course.price || "NA"}
+                    </p>
+                  </div>
+                  <motion.div 
+                    whileHover={{ rotate: 10, scale: 1.2 }}
+                    onClick={() => navigate(`/editcourse/${course._id}`)}
+                  >
+                    <FaEdit className="text-cyan-400 hover:text-cyan-300 cursor-pointer drop-shadow-[0_0_8px_#00ffff]"/>
+                  </motion.div>
+                </div>
+
+                <span className="w-fit px-3 py-1 text-xs rounded-full bg-cyan-900/50 text-cyan-300 shadow-[0_0_8px_#00ffff]">
+                  {course.status || "Draft"}
+                </span>
               </motion.div>
-            </div>
-            <span className="w-fit px-3 py-1 text-xs rounded-full bg-cyan-900/50 text-cyan-300 shadow-[0_0_8px_#00ffff]">
-              Draft
-            </span>
-          </motion.div>
+            ))
+          ) : (
+            <p className="text-center text-sm text-cyan-400 mt-4 italic drop-shadow-[0_0_10px_#00ffff]">
+              No courses created yet.
+            </p>
+          )}
+
           <p className="text-center text-sm text-cyan-400 mt-4 italic drop-shadow-[0_0_10px_#00ffff]">
             A List Of Your Recent Courses
           </p>
         </motion.div>
+
       </div>
     </motion.div>
   )

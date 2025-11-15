@@ -13,3 +13,4 @@ courseRouter.post("/editcourse/:courseId", isAuth, upload.single("thumbnail"), e
 courseRouter.get("/getcourse/:courseId", isAuth, getCourseById)
 courseRouter.delete("/remove/:courseId", isAuth, removeCourse)
 
+export default courseRouter
