@@ -134,7 +134,8 @@ function Courses() {
 
                     <td className="px-4 py-3">
                       <span className="px-3 py-1 rounded-full text-xs bg-cyan-900/50 text-cyan-300 shadow-[0_0_8px_#00ffff]">
-                        {course.status || "Draft"}
+                       {course.isPublished ? "Published" : "Draft"}
+
                       </span>
                     </td>
 
@@ -205,7 +206,8 @@ function Courses() {
                 </div>
 
                 <span className="w-fit px-3 py-1 text-xs rounded-full bg-cyan-900/50 text-cyan-300 shadow-[0_0_8px_#00ffff]">
-                  {course.status || "Draft"}
+                  {course.isPublished ? "Published" : "Draft"}
+
                 </span>
               </motion.div>
             ))

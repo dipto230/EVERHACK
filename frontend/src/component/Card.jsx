@@ -5,8 +5,30 @@ import { motion } from "framer-motion";
 function Card({ thumbnail, title, category, price, id }) {
   return (
     <motion.div
-      whileHover={{ scale: 1.04, boxShadow: "0 0 25px rgba(0, 255, 255, 0.4)" }}
-      transition={{ duration: 0.3 }}
+      // ⭐ Left-to-right glow animation
+      initial={{ x: -10, boxShadow: "0 0 10px rgba(0,255,255,0.2)" }}
+      animate={{
+        x: [-10, 10, -10],
+        boxShadow: [
+          "0 0 10px rgba(0,255,255,0.2)",
+          "0 0 25px rgba(0,255,255,0.5)",
+          "0 0 10px rgba(0,255,255,0.2)"
+        ],
+      }}
+      whileHover={{
+        scale: 1.04,
+        boxShadow: "0 0 25px rgba(0, 255, 255, 0.4)",
+      }}
+      transition={{
+        // main floating animation
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut",
+
+        // hover transition
+        scale: { duration: 0.3 },
+        boxShadow: { duration: 0.3 },
+      }}
       className="
         max-w-sm w-full 
         bg-[#0a0f1f]/60 
