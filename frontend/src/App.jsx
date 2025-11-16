@@ -19,6 +19,7 @@ import getPublishedCourse from './customHooks/getPublishedCourse.js'
 import EditCourse from './pages/EditCourse.jsx'
 import About from './pages/About.jsx'
 import Nav from './component/Nav.jsx'
+import AllCourses from './pages/AllCourses.jsx'
 
 
 
@@ -70,6 +71,7 @@ const App = () => {
         />
 
         <Route path="/about" element={<About />} />
+        <Route path='/allcourses' element={userData ? <AllCourses/> :<Navigate to={"/signup"}/> } />
         
 
         

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Card from './Card'
 import { motion } from "framer-motion"
+import { useNavigate } from "react-router-dom"
 
 function CardPage() {
+    const navigate = useNavigate()
     const { courseData } = useSelector(state => state.course)
 
     const [popularCourse, setPopularCourse] = useState([])
@@ -54,16 +56,45 @@ function CardPage() {
     return (
         <div className="relative flex items-center justify-center flex-col bg-[#020617] w-full">
 
-            {/* ⭐ Glowing title */}
-            <motion.h1
-                variants={titleGlow}
-                animate="animate"
-                className="md:text-[45px] text-[30px] font-semibold text-white mt-[30px]"
-            >
-                Our Popular Courses
-            </motion.h1>
+            {/* ⭐ Title + Animated Glowing Button */}
+            <div className="flex items-center gap-5 mt-[30px]">
 
-            {/* ⭐ One horizontal line */}
+                <motion.h1
+                    variants={titleGlow}
+                    animate="animate"
+                    className="md:text-[45px] text-[30px] font-semibold text-white"
+                >
+                    Our Popular Courses
+                </motion.h1>
+
+                {/* ⭐ Animated Glowing Button */}
+                <motion.button
+                    onClick={() => navigate('/allcourses')}
+                    whileHover={{
+                        scale: 1.08,
+                        boxShadow: "0 0 18px rgba(0,255,255,0.8)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    animate={{
+                        boxShadow: [
+                            "0 0 6px rgba(0,255,255,0.3)",
+                            "0 0 14px rgba(0,255,255,0.7)",
+                            "0 0 6px rgba(0,255,255,0.3)"
+                        ],
+                    }}
+                    transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                    className="px-4 py-2 text-white bg-cyan-600 rounded-lg"
+                >
+                    View All
+                </motion.button>
+
+            </div>
+
+            {/* ⭐ Courses Row */}
             <div className="w-full overflow-hidden py-10 flex justify-center">
 
                 <motion.div
