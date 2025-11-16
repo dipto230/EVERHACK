@@ -17,6 +17,8 @@ import getCreatorCourse from './customHooks/getCreatorCourse.js'
 import getPublishedCourse from './customHooks/getPublishedCourse.js'
 
 import EditCourse from './pages/EditCourse.jsx'
+import About from './pages/About.jsx'
+import Nav from './component/Nav.jsx'
 
 
 
@@ -28,7 +30,8 @@ const App = () => {
   const { userData } = useSelector(state=>state.user);
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
+      <Nav/>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={!userData ? <SignUp /> :<Navigate to={"/"}/>} />
@@ -64,7 +67,10 @@ const App = () => {
       ? <EditCourse />
       : <Navigate to="/signup" />
   }
-/>
+        />
+
+        <Route path="/about" element={<About />} />
+        
 
         
         
