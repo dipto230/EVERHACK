@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import Nav from '../component/Nav'
 import ExploreCourses from '../component/ExploreCourses'
 import CardPage from '../component/CardPage'
+import RecentEvents from '../component/RecentEvents'
 
 const Home = () => {
   return (
@@ -82,7 +83,8 @@ const Home = () => {
         <div className="absolute bottom-10 right-20 w-60 h-60 bg-emerald-400/20 rounded-full blur-3xl animate-pulse" />
       </div>
       <ExploreCourses />
-      <CardPage/>
+      <CardPage />
+      <RecentEvents/>
     </div>
   )
 }

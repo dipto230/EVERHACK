@@ -37,6 +37,7 @@ function Nav() {
     { name: 'About', path: '/about' },
     { name: 'What We Do', path: '/what-we-do' },
     { name: 'Mission & Vision', path: '/mission-vision' },
+    { name: 'Events', path: '/events' },
   ]
 
   return (

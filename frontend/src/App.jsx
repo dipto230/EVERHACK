@@ -20,6 +20,7 @@ import EditCourse from './pages/EditCourse.jsx'
 import About from './pages/About.jsx'
 import Nav from './component/Nav.jsx'
 import AllCourses from './pages/AllCourses.jsx'
+import EventsPage from './pages/Events.jsx'
 
 
 
@@ -71,7 +72,9 @@ const App = () => {
         />
 
         <Route path="/about" element={<About />} />
-        <Route path='/allcourses' element={userData ? <AllCourses/> :<Navigate to={"/signup"}/> } />
+        <Route path='/allcourses' element={userData ? <AllCourses /> : <Navigate to={"/signup"} />} />
+        <Route path="/events" element={<EventsPage />} />
+
         
 
         
