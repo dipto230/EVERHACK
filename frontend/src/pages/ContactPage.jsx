@@ -53,7 +53,7 @@ const ContactPage = () => {
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 blur-[150px] rounded-full"></div>
       <div className="absolute bottom-20 right-20 w-[400px] h-[400px] bg-emerald-500/10 blur-[150px] rounded-full"></div>
 
-      {/* NAVIGATION */}
+      {/* NAV */}
       <div className="absolute top-0 left-0 w-full z-50">
         <Nav />
       </div>
@@ -82,75 +82,129 @@ const ContactPage = () => {
         </p>
       </div>
 
-      {/* FORM CARD */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-        className="relative max-w-4xl mx-auto p-10 bg-[#0b1224]/90 border border-gray-700/60 rounded-3xl shadow-2xl shadow-cyan-500/10 backdrop-blur-2xl z-10"
-      >
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* FULL NAME */}
-          <input
-            type="text"
-            name="fullName"
-            required
-            placeholder="Full Name *"
-            className="p-4 rounded-xl bg-[#0d1a33] border border-gray-700 outline-none text-white placeholder-gray-500 focus:border-cyan-400 transition shadow-inner"
-            onChange={handleChange}
-          />
+      {/* FORM + CONTACT CARDS SIDE-BY-SIDE GRID */}
+      <div className="max-w-6xl mx-auto mt-20 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
 
-          {/* EMAIL */}
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="Email Address *"
-            className="p-4 rounded-xl bg-[#0d1a33] border border-gray-700 outline-none text-white placeholder-gray-500 focus:border-cyan-400 transition shadow-inner"
-            onChange={handleChange}
-          />
+        {/* LEFT — FORM */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="p-10 bg-[#0b1224]/90 border border-gray-700/60 rounded-3xl shadow-2xl shadow-cyan-500/10 backdrop-blur-2xl"
+        >
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
 
-          {/* PHONE */}
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            className="p-4 rounded-xl bg-[#0d1a33] border border-gray-700 outline-none text-white placeholder-gray-500 focus:border-cyan-400 transition shadow-inner"
-            onChange={handleChange}
-          />
+            <input
+              type="text"
+              name="fullName"
+              required
+              placeholder="Full Name *"
+              className="p-4 rounded-xl bg-[#0d1a33] border border-gray-700 outline-none text-white placeholder-gray-500"
+              onChange={handleChange}
+            />
 
-          {/* SUBJECT */}
-          <select
-            name="subject"
-            required
-            className="p-4 rounded-xl bg-[#0d1a33] border border-gray-700 outline-none text-white placeholder-gray-500 focus:border-cyan-400 transition shadow-inner"
-            onChange={handleChange}
-          >
-            <option value="">Select a Subject *</option>
-            <option>General Inquiry</option>
-            <option>Collaboration</option>
-            <option>Event Query</option>
-            <option>Technical Support</option>
-          </select>
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="Email Address *"
+              className="p-4 rounded-xl bg-[#0d1a33] border border-gray-700 outline-none text-white placeholder-gray-500"
+              onChange={handleChange}
+            />
 
-          {/* MESSAGE */}
-          <textarea
-            name="message"
-            required
-            placeholder="Your Message *"
-            className="p-4 col-span-2 rounded-xl bg-[#0d1a33] border border-gray-700 h-40 outline-none text-white placeholder-gray-500 focus:border-cyan-400 transition shadow-inner"
-            onChange={handleChange}
-          ></textarea>
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone Number"
+              className="p-4 rounded-xl bg-[#0d1a33] border border-gray-700 outline-none text-white placeholder-gray-500"
+              onChange={handleChange}
+            />
 
-          {/* BUTTON */}
-          <button
-            disabled={loading}
-            className="col-span-2 py-4 rounded-xl font-semibold bg-gradient-to-r from-cyan-400 to-emerald-400 text-black hover:scale-[1.03] transition-all shadow-lg shadow-cyan-400/20"
-          >
-            {loading ? "Sending..." : "Send Message"}
-          </button>
-        </form>
-      </motion.div>
+            <select
+              name="subject"
+              required
+              className="p-4 rounded-xl bg-[#0d1a33] border border-gray-700 outline-none text-white"
+              onChange={handleChange}
+            >
+              <option value="">Select a Subject *</option>
+              <option>General Inquiry</option>
+              <option>Collaboration</option>
+              <option>Event Query</option>
+              <option>Technical Support</option>
+            </select>
+
+            <textarea
+              name="message"
+              required
+              placeholder="Your Message *"
+              className="p-4 h-40 rounded-xl bg-[#0d1a33] border border-gray-700 outline-none text-white placeholder-gray-500"
+              onChange={handleChange}
+            ></textarea>
+
+            <button
+              disabled={loading}
+              className="py-4 rounded-xl font-semibold bg-gradient-to-r from-cyan-400 to-emerald-400 text-black hover:scale-[1.03] transition-all shadow-lg shadow-cyan-400/20"
+            >
+              {loading ? "Sending..." : "Send Message"}
+            </button>
+          </form>
+        </motion.div>
+
+        {/* RIGHT — CONTACT CARDS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+          <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4 items-start">
+            <span className="text-cyan-400 text-3xl">📧</span>
+            <div>
+              <h3 className="text-xl font-bold text-cyan-400">Email</h3>
+              <p className="text-gray-300">official@everhack.in</p>
+              <p className="text-gray-500 text-sm">We reply within 24 hours</p>
+            </div>
+          </div>
+
+          <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4 items-start">
+            <span className="text-green-400 text-3xl">💬</span>
+            <div>
+              <h3 className="text-xl font-bold text-cyan-400">WhatsApp</h3>
+              <p className="text-gray-300">Join our community</p>
+              <p className="text-gray-500 text-sm">500+ active members</p>
+            </div>
+          </div>
+
+          <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4 items-start">
+            <span className="text-blue-400 text-3xl">🐦</span>
+            <div>
+              <h3 className="text-xl font-bold text-cyan-400">Twitter</h3>
+              <p className="text-gray-300">@everhack</p>
+            </div>
+          </div>
+
+          <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4 items-start">
+            <span className="text-pink-400 text-3xl">📸</span>
+            <div>
+              <h3 className="text-xl font-bold text-cyan-400">Instagram</h3>
+              <p className="text-gray-300">@everhack</p>
+            </div>
+          </div>
+
+          <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4 items-start">
+            <span className="text-blue-500 text-3xl">💼</span>
+            <div>
+              <h3 className="text-xl font-bold text-cyan-400">LinkedIn</h3>
+              <p className="text-gray-300">EverHack</p>
+            </div>
+          </div>
+
+          <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4 items-start">
+            <span className="text-gray-300 text-3xl">💻</span>
+            <div>
+              <h3 className="text-xl font-bold text-cyan-400">GitHub</h3>
+              <p className="text-gray-300">@everhack</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
       <div className="h-32"></div>
     </div>
