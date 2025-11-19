@@ -24,6 +24,7 @@ import EventsPage from './pages/Events.jsx'
 import AdminEventRegistrations from './pages/AdminEventRegistrations.jsx'
 import WhatWeDoFull from './pages/WhatWeDoFull.jsx'
 import MissionVisionPage from './pages/MissionVisionPage.jsx'
+import ContactPage from './pages/ContactPage.jsx'
 
 
 
@@ -80,6 +81,7 @@ const App = () => {
         <Route path="/admin/events-registrations" element={<AdminEventRegistrations />} />
         <Route path="/what-we-do" element={<WhatWeDoFull />} />
         <Route path="/mission-vision" element={<MissionVisionPage />} />
+        <Route path="/contact" element={<ContactPage />} />
 
 
 
