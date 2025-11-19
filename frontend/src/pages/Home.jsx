@@ -4,6 +4,7 @@ import Nav from '../component/Nav'
 import ExploreCourses from '../component/ExploreCourses'
 import CardPage from '../component/CardPage'
 import RecentEvents from '../component/RecentEvents'
+import WhatWeDoPreview from '../component/WhatWeDoPreview'
 
 const Home = () => {
   return (
@@ -84,7 +85,8 @@ const Home = () => {
       </div>
       <ExploreCourses />
       <CardPage />
-      <RecentEvents/>
+      <RecentEvents />
+      <WhatWeDoPreview/>
     </div>
   )
 }

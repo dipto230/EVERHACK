@@ -22,6 +22,7 @@ import Nav from './component/Nav.jsx'
 import AllCourses from './pages/AllCourses.jsx'
 import EventsPage from './pages/Events.jsx'
 import AdminEventRegistrations from './pages/AdminEventRegistrations.jsx'
+import WhatWeDoFull from './pages/WhatWeDoFull.jsx'
 
 
 
@@ -76,6 +77,8 @@ const App = () => {
         <Route path='/allcourses' element={userData ? <AllCourses /> : <Navigate to={"/signup"} />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/admin/events-registrations" element={<AdminEventRegistrations />} />
+        <Route path="/what-we-do" element={<WhatWeDoFull />} />
+
 
         
 
