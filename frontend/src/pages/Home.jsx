@@ -5,6 +5,7 @@ import ExploreCourses from '../component/ExploreCourses'
 import CardPage from '../component/CardPage'
 import RecentEvents from '../component/RecentEvents'
 import WhatWeDoPreview from '../component/WhatWeDoPreview'
+import HomeMissionVision from '../component/HomeMissionVision'
 
 const Home = () => {
   return (
@@ -86,7 +87,8 @@ const Home = () => {
       <ExploreCourses />
       <CardPage />
       <RecentEvents />
-      <WhatWeDoPreview/>
+      <WhatWeDoPreview />
+      <HomeMissionVision/>
     </div>
   )
 }

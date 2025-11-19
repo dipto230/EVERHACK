@@ -4,6 +4,21 @@ import { FaPuzzlePiece, FaBrain } from "react-icons/fa";
 import { GiTargetShot } from "react-icons/gi";
 import { BsChatDotsFill } from "react-icons/bs";
 
+// Floating background animation variants
+const floatingVariant = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 0.15,
+    y: [0, -40, 0],
+    x: [0, 30, 0],
+    transition: {
+      duration: 12,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
 const items = [
   {
     title: "Workshops & Webinars",
@@ -45,24 +60,46 @@ const items = [
 
 export default function WhatWeDoFull() {
   return (
-    <div className="min-h-screen bg-[#050a19] text-white pt-[120px] px-[8%] pb-32">
+    <div className="relative min-h-screen bg-[#050a19] text-white pt-[120px] px-[8%] pb-32 overflow-hidden">
+
+      {/* Animated Background Orbs */}
+      <motion.div
+        variants={floatingVariant}
+        initial="initial"
+        animate="animate"
+        className="absolute top-10 left-20 w-[300px] h-[300px] rounded-full bg-[#00FFD1]/20 blur-[120px]"
+      />
+
+      <motion.div
+        variants={floatingVariant}
+        initial="initial"
+        animate="animate"
+        className="absolute bottom-20 right-16 w-[260px] h-[260px] rounded-full bg-[#ff4ecd]/20 blur-[120px]"
+      />
+
+      <motion.div
+        variants={floatingVariant}
+        initial="initial"
+        animate="animate"
+        className="absolute top-1/2 left-1/2 w-[350px] h-[350px] rounded-full bg-[#009dff]/20 blur-[120px]"
+      />
 
       {/* Header */}
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-6xl font-extrabold text-center neonGlow"
+        className="text-6xl font-extrabold text-center neonGlow relative z-10"
       >
         <span className="text-[#00FFD1]">What</span> We Do
       </motion.h1>
 
-      <p className="text-center text-gray-300 mt-4 mb-16 text-lg max-w-3xl mx-auto">
+      <p className="text-center text-gray-300 mt-4 mb-16 text-lg max-w-3xl mx-auto relative z-10">
         At EverHack, we build a powerful ecosystem of learning, innovation, and growth.  
         Explore the pillars of what makes our community thrive.
       </p>
 
       {/* Blog-style sections */}
-      <div className="flex flex-col gap-20">
+      <div className="flex flex-col gap-20 relative z-10">
         {items.map((item, idx) => (
           <motion.div
             key={idx}
