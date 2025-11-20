@@ -7,6 +7,7 @@ import RecentEvents from '../component/RecentEvents'
 import WhatWeDoPreview from '../component/WhatWeDoPreview'
 import HomeMissionVision from '../component/HomeMissionVision'
 import HomeContactPreview from '../component/HomeContactPreview'
+import JoinEverHack from '../component/JoinEverHack'
 
 const Home = () => {
   return (
@@ -90,7 +91,8 @@ const Home = () => {
       <RecentEvents />
       <WhatWeDoPreview />
       <HomeMissionVision />
-      <HomeContactPreview/>
+      <HomeContactPreview />
+      <JoinEverHack/>
     </div>
   )
 }

@@ -3,6 +3,30 @@ import { databases, DATABASE_ID, COLLECTION_ID } from "../appwrite";
 import Nav from "../component/Nav";
 import { motion } from "framer-motion";
 
+// FAQ CARD COMPONENT
+const FAQCard = ({ question, answer }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      onClick={() => setOpen(!open)}
+      className="cursor-pointer p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl"
+    >
+      <div className="flex justify-between items-center">
+        <h3 className="text-xl font-semibold text-cyan-400">{question}</h3>
+        <span className="text-gray-400 text-2xl">{open ? "−" : "+"}</span>
+      </div>
+
+      {open && (
+        <p className="text-gray-300 mt-3 leading-relaxed">{answer}</p>
+      )}
+    </motion.div>
+  );
+};
+
 const ContactPage = () => {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
@@ -206,9 +230,93 @@ const ContactPage = () => {
         </div>
       </div>
 
+      {/* FAQ SECTION — ADDED AT BOTTOM */}
+      {/* FAQ SECTION — CARD STYLE */}
+<div className="max-w-5xl mx-auto mt-32 mb-32 relative z-10">
+  <motion.h2
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="text-4xl font-extrabold text-center mb-12"
+  >
+    Frequently Asked <span className="text-cyan-400">Questions</span>
+  </motion.h2>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+    {/* CARD 1 */}
+    <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4">
+      <span className="text-cyan-400 text-3xl">❓</span>
+      <div>
+        <h3 className="text-xl font-bold text-cyan-400">How can I join EverHack?</h3>
+        <p className="text-gray-300 text-sm mt-1">
+          Click the "Join Community" button and join our WhatsApp group for free.
+        </p>
+      </div>
+    </div>
+
+    {/* CARD 2 */}
+    <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4">
+      <span className="text-cyan-400 text-3xl">🎟️</span>
+      <div>
+        <h3 className="text-xl font-bold text-cyan-400">Are events free?</h3>
+        <p className="text-gray-300 text-sm mt-1">
+          Most events are free. Some special workshops may have a small fee.
+        </p>
+      </div>
+    </div>
+
+    {/* CARD 3 */}
+    <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4">
+      <span className="text-cyan-400 text-3xl">🎤</span>
+      <div>
+        <h3 className="text-xl font-bold text-cyan-400">Can I become a speaker?</h3>
+        <p className="text-gray-300 text-sm mt-1">
+          Yes! Anyone can apply. Send us your topic through the contact form.
+        </p>
+      </div>
+    </div>
+
+    {/* CARD 4 */}
+    <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4">
+      <span className="text-cyan-400 text-3xl">💼</span>
+      <div>
+        <h3 className="text-xl font-bold text-cyan-400">Do you offer internships?</h3>
+        <p className="text-gray-300 text-sm mt-1">
+          Yes, we offer opportunities occasionally for motivated members.
+        </p>
+      </div>
+    </div>
+
+    {/* CARD 5 */}
+    <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4">
+      <span className="text-cyan-400 text-3xl">🤝</span>
+      <div>
+        <h3 className="text-xl font-bold text-cyan-400">How can companies collaborate?</h3>
+        <p className="text-gray-300 text-sm mt-1">
+          Email us at official@everhack.in for partnerships or sponsorships.
+        </p>
+      </div>
+    </div>
+
+    {/* CARD 6 */}
+    <div className="p-6 bg-[#0b1224]/80 border border-gray-700 rounded-2xl shadow-xl flex gap-4">
+      <span className="text-cyan-400 text-3xl">🌐</span>
+      <div>
+        <h3 className="text-xl font-bold text-cyan-400">What is the community language?</h3>
+        <p className="text-gray-300 text-sm mt-1">
+          English is primary, but everyone is welcome regardless of language.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
       <div className="h-32"></div>
     </div>
   );
 };
 
-export default ContactPage;
+export default ContactPage;    
