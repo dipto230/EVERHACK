@@ -8,6 +8,7 @@ import WhatWeDoPreview from '../component/WhatWeDoPreview'
 import HomeMissionVision from '../component/HomeMissionVision'
 import HomeContactPreview from '../component/HomeContactPreview'
 import JoinEverHack from '../component/JoinEverHack'
+import Footer from '../component/Footer'
 
 const Home = () => {
   return (
@@ -92,7 +93,8 @@ const Home = () => {
       <WhatWeDoPreview />
       <HomeMissionVision />
       <HomeContactPreview />
-      <JoinEverHack/>
+      <JoinEverHack />
+      <Footer/>
     </div>
   )
 }
