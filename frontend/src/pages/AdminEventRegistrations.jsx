@@ -18,24 +18,32 @@ function AdminEventRegistrations() {
     fetch();
   }, []);
 
-  const convertToXML = () => {
-    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<registrations>\n`;
-    registrations.forEach((reg) => {
-      // handle Firestore serverTimestamp: may be null or Timestamp object
-      let ts = reg.createdAt && reg.createdAt.toDate ? reg.createdAt.toDate().toISOString() : (reg.createdAt || "");
-      xml += `  <registration>\n`;
-      xml += `    <id>${reg.id}</id>\n`;
-      xml += `    <name>${escapeXml(reg.name)}</name>\n`;
-      xml += `    <email>${escapeXml(reg.email)}</email>\n`;
-      xml += `    <phone>${escapeXml(reg.phone || "")}</phone>\n`;
-      xml += `    <eventId>${reg.eventId}</eventId>\n`;
-      xml += `    <eventTitle>${escapeXml(reg.eventTitle)}</eventTitle>\n`;
-      xml += `    <createdAt>${ts}</createdAt>\n`;
-      xml += `  </registration>\n`;
-    });
-    xml += `</registrations>`;
-    return xml;
-  };
+const convertToXML = () => {
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  xml += `<?xml-stylesheet type="text/xsl" href="style.xsl"?>\n`;
+  xml += `<registrations>\n`;
+
+  registrations.forEach((reg) => {
+    let ts =
+      reg.createdAt && reg.createdAt.toDate
+        ? reg.createdAt.toDate().toISOString()
+        : (reg.createdAt || "");
+
+    xml += `  <registration>\n`;
+    xml += `    <id>${reg.id}</id>\n`;
+    xml += `    <name>${escapeXml(reg.name)}</name>\n`;
+    xml += `    <email>${escapeXml(reg.email)}</email>\n`;
+    xml += `    <phone>${escapeXml(reg.phone || "")}</phone>\n`;
+    xml += `    <eventId>${reg.eventId}</eventId>\n`;
+    xml += `    <eventTitle>${escapeXml(reg.eventTitle)}</eventTitle>\n`;
+    xml += `    <createdAt>${ts}</createdAt>\n`;
+    xml += `  </registration>\n`;
+  });
+
+  xml += `</registrations>`;
+  return xml;
+};
+
 
   // basic XML escaping
   const escapeXml = (unsafe) => {
